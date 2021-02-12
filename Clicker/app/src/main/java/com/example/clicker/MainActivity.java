@@ -2,6 +2,7 @@ package com.example.clicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     ScheduledFuture timer = null;
     int time = 10;
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
         myScoreText = (TextView)findViewById(R.id.textView3);
 
         service = Executors.newScheduledThreadPool(1);
+
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+        best = sharedPreferences.getInt("best", 0);
+        myScoreText.setText("hiscore: " + best);
     }
 
     public void onClick(View v){
@@ -73,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
                     if (clicks > best){
                         best = clicks;
                         runOnUiThread(() -> myScoreText.setText("hiscore: " + best));
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt("best", best);
+                        editor.apply();
                     }
                 }
             }
