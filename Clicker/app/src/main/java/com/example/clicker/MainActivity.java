@@ -19,7 +19,9 @@ public class MainActivity extends AppCompatActivity {
     Button myButton;
     TextView myText;
     TextView myTimerText;
+    TextView myScoreText;
     int clicks = 0;
+    int best = 0;
 
     ScheduledExecutorService service;
     ScheduledFuture timer = null;
@@ -32,12 +34,15 @@ public class MainActivity extends AppCompatActivity {
         myButton = (Button)findViewById(R.id.purplebutton);
         myText = (TextView)findViewById(R.id.textView);
         myTimerText = (TextView)findViewById(R.id.textView2);
+        myScoreText = (TextView)findViewById(R.id.textView3);
 
         service = Executors.newScheduledThreadPool(1);
     }
 
     public void onClick(View v){
         if (timer == null){
+            clicks = 0;
+            time = 10;
             startTimer();
         }
 
@@ -50,13 +55,24 @@ public class MainActivity extends AppCompatActivity {
             try{
                 runOnUiThread(() -> {
                     myTimerText.setText(time + " seconds remaining");
+                    time--; //Note: "potentially desyncs our app logic"
                 });
 
-                time--;
-
                 if (time <= 0){
-                    if (timer != null){
+                    //Turn off timer, add cooldown, update hiscore when it reaches 0
+                    if (timer != null) {
                         timer.cancel(true);
+                        timer = null;
+                    }
+                    runOnUiThread(() -> {
+                        myButton.setEnabled(false);
+                    });
+                    service.schedule(() -> runOnUiThread(() -> {
+                        myButton.setEnabled(true);
+                    }), 3, TimeUnit.SECONDS);
+                    if (clicks > best){
+                        best = clicks;
+                        runOnUiThread(() -> myScoreText.setText("hiscore: " + best));
                     }
                 }
             }
