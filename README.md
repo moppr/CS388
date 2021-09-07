@@ -27,6 +27,7 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 <img src='https://i.imgur.com/it9sdmd.mp4' title='GIF Walkthrough' width='' alt='GIF Walkthrough' />
+https://i.imgur.com/it9sdmd.mp4
 
 GIF created with ShotCut and OBS.
 
