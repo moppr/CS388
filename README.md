@@ -1,29 +1,31 @@
-# Project 2 - *SimpleTweet*
+# Project 2 - *Name of App Here*
 
-**SimpleTweet** is an android app that allows a user to view their Twitter timeline. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
+**Name of your app** is an android app that allows a user to view his Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **3** hours spent in total
+Time spent: **X** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-- [x] User can **sign in to Twitter** using OAuth login
-- [x]	User can **view tweets from their home timeline**
-  - [x] User is displayed the username, name, and body for each tweet
-  - [x] User is displayed the [relative timestamp](https://gist.github.com/nesquena/f786232f5ef72f6e10a7) for each tweet "8m", "7h"
-- [x] User can refresh tweets timeline by pulling down to refresh
+- [x] User can **compose and post a new tweet**
+  - [x] User can click a “Compose” icon in the Action Bar on the top right
+  - [x] User can then enter a new tweet and post this to twitter
+  - [x] User is taken back to home timeline with **new tweet visible** in timeline
+  - [x] Newly created tweet should be manually inserted into the timeline and not rely on a full refresh
+  - [ ] User can **see a counter with total number of characters left for tweet** on compose tweet page
 
 The following **optional** features are implemented:
 
-- [ ] User can view more tweets as they scroll with infinite pagination
-- [ ] Improve the user interface and theme the app to feel "twitter branded"
-- [ ] Links in tweets are clickable and will launch the web browser
-- [ ] User can tap a tweet to display a "detailed" view of that tweet
-- [ ] User can see embedded image media within the tweet detail view
-- [ ] User can watch embedded video within the tweet
-- [ ] User can open the twitter app offline and see last loaded tweets
-- [ ] On the Twitter timeline, leverage the CoordinatorLayout to apply scrolling behavior that hides / shows the toolbar.
+- [ ] User is using **"Twitter branded" colors and styles**
+- [ ] User can click links in tweets launch the web browser 
+- [ ] User can **select "reply" from detail view to respond to a tweet**
+- [ ] The "Compose" action is moved to a FloatingActionButton instead of on the AppBar
+- [ ] Compose tweet functionality is build using modal overlay
+- [ ] Use Parcelable instead of Serializable using the popular [Parceler library](http://guides.codepath.org/android/Using-Parceler).
+- [ ] User can **open the twitter app offline and see last loaded tweets**. Persisted in SQLite tweets are refreshed on every application launch. While "live data" is displayed when app can get it from Twitter API, it is also saved for use in offline mode.
+- [ ] When a user leaves the compose view without publishing and there is existing text, prompt to save or delete the draft. If saved, the draft should then be **persisted to disk** and can later be resumed from the compose view.
+- [ ] Enable your app to receive implicit intents from other apps. When a link is shared from a web browser, it should pre-fill the text and title of the web page when composing a tweet. 
 
 The following **additional** features are implemented:
 
@@ -33,16 +35,15 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.imgur.com/nHhLlqW.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/QXOUxqc.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Several changes to Twitter's developer site since the filming of the video made it a little more difficult to find the correct pages and do the proper setup.
-Namely, the Twitter site has introduced Projects alongside Apps, and claims that Apps can't use current API endpoints. Setting up the project became harder thanks
-to the relocation of several pages and the fact that 3-legged oauth now needs to be enabled to even access some of the mentioned settings. Lastly, with Twitter
-releasing a version 2.0 of their API and promoting it heavily over 1.1, it became a lot harder to find the same documentation featured in the video.
+Needing to cold-boot the emulator every time a Toast is used is a bit of an annoyance, because for some reason they won't display without doing that, but at least
+it's a consistent enough issue to know what to do each time it shows up. There are also warnings coming from Android Studio as usual mentioning things being deprecated
+on the Twitter API since the tutorial is a couple years old now, but thankfully with prior awareness to that it's no real issue.
 
 ## Open-source libraries used
 
